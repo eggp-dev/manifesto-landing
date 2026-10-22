@@ -1,5 +1,7 @@
 "use client";
 
+import Image from "next/image";
+
 import { motion } from "framer-motion";
 import { Github, Twitter, ExternalLink } from "lucide-react";
 import Link from "next/link";
@@ -32,7 +34,7 @@ export default function Footer() {
             className="md:col-span-1"
           >
             <Link href="/" className="flex items-center gap-2 mb-4">
-              <img src="/logo.png" alt="Manifesto" className="w-8 h-8 rounded-lg" />
+              <Image unoptimized src="/logo.png" width={32} height={32} alt="Manifesto" className="w-8 h-8 rounded-lg" />
               <span className="text-xl font-bold text-white">Manifesto</span>
             </Link>
             <p className="text-sm text-muted-foreground mb-4">

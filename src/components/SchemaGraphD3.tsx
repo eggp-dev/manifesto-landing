@@ -119,9 +119,9 @@ export default function SchemaGraphD3({
       .force("y", forceY<GraphNode>().y(0).strength(0.05));
 
     simRef.current = sim;
-    setSettled(false);
 
     sim.on("tick", () => {
+      setSettled(false);
       setSimNodes([...gNodes]);
       setSimLinks([...gLinks]);
     });

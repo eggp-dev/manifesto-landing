@@ -1,5 +1,7 @@
 "use client";
 
+import Image from "next/image";
+
 import { motion } from "framer-motion";
 import { ExternalLink, Bot, Shield, GitBranch, Eye, Github } from "lucide-react";
 
@@ -68,8 +70,9 @@ export default function ShowcaseSection() {
           >
             <div className="bg-card rounded-xl p-2 sm:p-3 overflow-hidden">
               <div className="relative rounded-lg overflow-hidden">
-                <img
+                <Image unoptimized
                   src="/taskflow-preview.png"
+                  width={3020} height={1556}
                   alt="TaskFlow — AI-powered task management with Manifesto governance"
                   className="w-full rounded-lg transition-transform duration-500 group-hover:scale-[1.02]"
                 />
