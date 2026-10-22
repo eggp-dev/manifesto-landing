@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Script from "next/script";
 import { Inter, JetBrains_Mono } from "next/font/google";
 import { Analytics } from "@vercel/analytics/react";
 import { SpeedInsights } from "@vercel/speed-insights/next";
@@ -45,8 +46,8 @@ export default function RootLayout({
   return (
     <html lang="en" className="dark">
       <head>
-        <script async src="https://www.googletagmanager.com/gtag/js?id=G-JFV0ZXY9R4" />
-        <script
+        <Script strategy="beforeInteractive" src="https://www.googletagmanager.com/gtag/js?id=G-JFV0ZXY9R4" />
+        <Script id="google-analytics-init" strategy="beforeInteractive"
           dangerouslySetInnerHTML={{
             __html: `window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-JFV0ZXY9R4');`,
           }}

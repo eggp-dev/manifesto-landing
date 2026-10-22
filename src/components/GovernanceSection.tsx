@@ -1,6 +1,6 @@
 "use client";
 
-import { useCallback, useEffect, useRef, useState } from "react";
+import { useCallback, useRef, useState, useSyncExternalStore } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import {
   Shield,
@@ -9,11 +9,10 @@ import {
   Plus,
   Trash2,
   Check,
-  X,
   User,
   ArrowRight,
 } from "lucide-react";
-import { createManifesto, type Snapshot, type TypedIntent } from "@manifesto-ai/sdk";
+import { createManifesto, type TypedIntent } from "@manifesto-ai/sdk";
 import { withLineage, createInMemoryLineageStore } from "@manifesto-ai/lineage";
 import {
   withGovernance,
@@ -91,33 +90,37 @@ const flowSteps = [
 export default function GovernanceSection() {
   const [mode, setMode] = useState<Mode>("auto_approve");
   const runtimeRef = useRef<GovernanceInstance<TodoDomain> | null>(null);
-  const [snapshot, setSnapshot] = useState<Snapshot<TodoDomain["state"]> | null>(null);
   const [proposals, setProposals] = useState<readonly Proposal[]>([]);
   const [newTodo, setNewTodo] = useState("");
-  const [ready, setReady] = useState(false);
   const [flowActive, setFlowActive] = useState(-1);
   const [flowLabel, setFlowLabel] = useState("");
 
-  useEffect(() => {
+  const subscribe = useCallback((notify: () => void) => {
     const rt = createRuntime(mode);
     runtimeRef.current = rt;
-    setSnapshot(rt.getSnapshot());
-    setReady(true);
 
     const unsub = rt.subscribe(
       (s) => s,
-      (s) => setSnapshot(s),
+      notify,
     );
 
     return () => {
       unsub();
       rt.dispose();
       runtimeRef.current = null;
-      setReady(false);
-      setProposals([]);
-      setFlowActive(-1);
     };
   }, [mode]);
+  const getSnapshot = useCallback(() => runtimeRef.current?.getSnapshot() ?? null, []);
+  const snapshot = useSyncExternalStore(subscribe, getSnapshot, () => null);
+  const ready = snapshot !== null;
+
+  const changeMode = (nextMode: Mode) => {
+    if (nextMode === mode) return;
+    setProposals([]);
+    setFlowActive(-1);
+    setMode(nextMode);
+  };
+
 
   const animateFlow = useCallback(async (label: string) => {
     setFlowLabel(label);
@@ -240,7 +243,7 @@ export default function GovernanceSection() {
             {/* Mode Toggle */}
             <div className="flex items-center justify-center gap-4">
               <button
-                onClick={() => setMode("auto_approve")}
+                onClick={() => changeMode("auto_approve")}
                 className={`flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-medium transition-colors ${
                   mode === "auto_approve"
                     ? "bg-violet-600 text-white"
@@ -251,7 +254,7 @@ export default function GovernanceSection() {
                 Auto Approve
               </button>
               <button
-                onClick={() => setMode("hitl")}
+                onClick={() => changeMode("hitl")}
                 className={`flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-medium transition-colors ${
                   mode === "hitl"
                     ? "bg-amber-600 text-white"

@@ -1,5 +1,7 @@
 "use client";
 
+import Image from "next/image";
+
 import { motion } from "framer-motion";
 import { Github, Menu, X } from "lucide-react";
 import Link from "next/link";
@@ -19,7 +21,7 @@ export default function Header() {
         <div className="flex h-16 items-center justify-between">
           {/* Logo */}
           <Link href="/" className="flex items-center gap-2">
-            <img src="/logo.png" alt="Manifesto" className="w-8 h-8 rounded-lg" />
+            <Image unoptimized src="/logo.png" width={32} height={32} alt="Manifesto" className="w-8 h-8 rounded-lg" />
             <span className="text-xl font-bold text-white">Manifesto</span>
           </Link>
 

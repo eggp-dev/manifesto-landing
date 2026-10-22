@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useCallback, useRef } from "react";
+import { useState, useCallback } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Plus, Minus, RotateCcw } from "lucide-react";
 import { useManifesto } from "@/lib/use-manifesto";
@@ -11,7 +11,7 @@ export default function CounterDemo() {
   const { instance, snapshot, ready } = useManifesto<CounterDomain>(counterMel);
   const [diffs, setDiffs] = useState<DiffEntry[]>([]);
   const [lastAction, setLastAction] = useState<string>("");
-  const versionRef = useRef(0);
+  const [version, setVersion] = useState(0);
 
   const captureAndDispatch = useCallback(
     async (actionName: string, ...args: unknown[]) => {
@@ -38,7 +38,7 @@ export default function CounterDemo() {
         prev as unknown as Record<string, unknown>,
         next as unknown as Record<string, unknown>,
       );
-      versionRef.current++;
+      setVersion((value) => value + 1);
       setDiffs(newDiffs);
       setLastAction(actionName);
     },
@@ -153,7 +153,7 @@ export default function CounterDemo() {
                   </motion.div>
                 ) : (
                   <motion.div
-                    key={lastAction + versionRef.current}
+                    key={lastAction + version}
                     initial={{ opacity: 0, x: 10 }}
                     animate={{ opacity: 1, x: 0 }}
                     transition={{ duration: 0.2 }}

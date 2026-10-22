@@ -129,7 +129,6 @@ function buildHighlightedLines(source: string): HighlightedLine[] {
 
   // Fill gaps (whitespace between tokens)
   const finalResult: HighlightedLine[] = [];
-  let globalOffset = 0;
 
   for (let lineIdx = 0; lineIdx < lines.length; lineIdx++) {
     const line = lines[lineIdx];
@@ -137,7 +136,6 @@ function buildHighlightedLines(source: string): HighlightedLine[] {
 
     if (lineTokens.length === 0) {
       finalResult.push({ tokens: [{ text: line, className: "text-white/80" }] });
-      globalOffset += line.length + 1;
       continue;
     }
 
@@ -160,7 +158,6 @@ function buildHighlightedLines(source: string): HighlightedLine[] {
     }
 
     finalResult.push({ tokens: sortedTokens.map(({ text, className }) => ({ text, className })) });
-    globalOffset += line.length + 1;
   }
 
   return finalResult;

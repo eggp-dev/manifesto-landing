@@ -1,9 +1,9 @@
 "use client";
 
-import { useState, useCallback, useEffect, useRef } from "react";
+import { useState, useCallback, useRef, useSyncExternalStore } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { GitBranch, RotateCcw, Zap } from "lucide-react";
-import { createManifesto, type Snapshot } from "@manifesto-ai/sdk";
+import { createManifesto } from "@manifesto-ai/sdk";
 import { withLineage, createInMemoryLineageStore } from "@manifesto-ai/lineage";
 import { counterMel, type CounterDomain } from "@/lib/domains";
 
@@ -21,20 +21,18 @@ function createLineageRuntime() {
 }
 
 export default function LineageSection() {
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const runtimeRef = useRef<ReturnType<typeof createLineageRuntime> | null>(null);
-  const [snapshot, setSnapshot] = useState<Snapshot<CounterDomain["state"]> | null>(null);
   const [timeline, setTimeline] = useState<WorldNode[]>([]);
   const [activeIndex, setActiveIndex] = useState(-1);
-  const [ready, setReady] = useState(false);
+  const notifyRef = useRef<(() => void) | null>(null);
+  const unsubscribeRef = useRef<(() => void) | null>(null);
   const indexRef = useRef(0);
   const scrollRef = useRef<HTMLDivElement>(null);
 
-  useEffect(() => {
+  const subscribe = useCallback((notify: () => void) => {
     const rt = createLineageRuntime();
     runtimeRef.current = rt;
-    setSnapshot(rt.getSnapshot());
-    setReady(true);
+    notifyRef.current = notify;
 
     const snap = rt.getSnapshot();
     const initNode: WorldNode = {
@@ -47,27 +45,29 @@ export default function LineageSection() {
     setActiveIndex(0);
     indexRef.current = 0;
 
-    const unsub = rt.subscribe(
+    unsubscribeRef.current = rt.subscribe(
       (s) => s,
-      (s) => setSnapshot(s),
+      notify,
     );
 
     return () => {
-      unsub();
-      rt.dispose();
+      unsubscribeRef.current?.();
+      unsubscribeRef.current = null;
+      runtimeRef.current?.dispose();
+      notifyRef.current = null;
       runtimeRef.current = null;
-      setReady(false);
-      setTimeline([]);
-      setActiveIndex(-1);
     };
   }, []);
+  const getSnapshot = useCallback(() => runtimeRef.current?.getSnapshot() ?? null, []);
+  const snapshot = useSyncExternalStore(subscribe, getSnapshot, () => null);
+  const ready = snapshot !== null;
+
 
   const dispatchAction = useCallback(
     async (actionName: "increment" | "decrement") => {
       if (!runtimeRef.current) return;
       const rt = runtimeRef.current;
       const action = rt.MEL.actions[actionName];
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
       const intent = (rt.createIntent as any)(action);
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -122,7 +122,9 @@ export default function LineageSection() {
         }
       }
 
-      setSnapshot(newRt.getSnapshot());
+      unsubscribeRef.current?.();
+      unsubscribeRef.current = newRt.subscribe((s) => s, () => notifyRef.current?.());
+      notifyRef.current?.();
       setActiveIndex(index);
 
       rt.dispose();
