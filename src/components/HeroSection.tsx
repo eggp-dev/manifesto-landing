@@ -104,7 +104,7 @@ export default function HeroSection() {
             className="flex flex-col sm:flex-row items-center justify-center gap-4"
           >
             <a
-              href="https://docs.manifesto-ai.dev/guide/quick-start"
+              href="https://manifesto-docs.eggp.dev/guide/quick-start"
               target="_blank"
               rel="noopener noreferrer"
               className="group relative px-8 py-4 rounded-xl font-medium text-white overflow-hidden transition-all hover:scale-105"
@@ -118,7 +118,7 @@ export default function HeroSection() {
             </a>
 
             <a
-              href="https://docs.manifesto-ai.dev/guide/introduction"
+              href="https://manifesto-docs.eggp.dev/guide/introduction"
               target="_blank"
               rel="noopener noreferrer"
               className="px-8 py-4 rounded-xl font-medium text-white border border-violet-500/20 hover:border-violet-500/40 hover:bg-violet-500/5 transition-all"
@@ -127,7 +127,7 @@ export default function HeroSection() {
             </a>
 
             <a
-              href="https://taskflow.manifesto-ai.dev"
+              href="https://manifesto-taskflow.eggp.dev"
               target="_blank"
               rel="noopener noreferrer"
               className="px-8 py-4 rounded-xl font-medium text-violet-300 border border-violet-500/20 hover:border-violet-500/40 hover:bg-violet-500/5 transition-all flex items-center gap-2"

@@ -50,7 +50,7 @@ export default function Header() {
               Architecture
             </Link>
             <a
-              href="https://docs.manifesto-ai.dev"
+              href="https://manifesto-docs.eggp.dev"
               target="_blank"
               rel="noopener noreferrer"
               className="text-sm text-muted-foreground hover:text-white transition-colors"
@@ -58,7 +58,7 @@ export default function Header() {
               Docs
             </a>
             <a
-              href="https://github.com/manifesto-ai/core"
+              href="https://github.com/eggp-dev/manifesto-core"
               target="_blank"
               rel="noopener noreferrer"
               className="text-sm text-muted-foreground hover:text-white transition-colors flex items-center gap-1"
@@ -67,7 +67,7 @@ export default function Header() {
               GitHub
             </a>
             <a
-              href="https://docs.manifesto-ai.dev/guide/quick-start"
+              href="https://manifesto-docs.eggp.dev/guide/quick-start"
               target="_blank"
               rel="noopener noreferrer"
               className="px-4 py-2 text-sm font-medium text-white rounded-lg bg-violet-600 hover:bg-violet-700 transition-colors"
@@ -127,7 +127,7 @@ export default function Header() {
                 Architecture
               </Link>
               <a
-                href="https://docs.manifesto-ai.dev"
+                href="https://manifesto-docs.eggp.dev"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-sm text-muted-foreground hover:text-white transition-colors"
@@ -136,7 +136,7 @@ export default function Header() {
                 Docs
               </a>
               <a
-                href="https://github.com/manifesto-ai/core"
+                href="https://github.com/eggp-dev/manifesto-core"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-sm text-muted-foreground hover:text-white transition-colors flex items-center gap-1"
@@ -145,7 +145,7 @@ export default function Header() {
                 GitHub
               </a>
               <a
-                href="https://docs.manifesto-ai.dev/guide/quick-start"
+                href="https://manifesto-docs.eggp.dev/guide/quick-start"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="px-4 py-2 text-sm font-medium text-white rounded-lg bg-violet-600 hover:bg-violet-700 transition-colors text-center"
