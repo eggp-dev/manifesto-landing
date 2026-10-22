@@ -6,12 +6,12 @@ import Link from "next/link";
 
 const links = {
   resources: [
-    { label: "Documentation", href: "https://docs.manifesto-ai.dev" },
-    { label: "Quick Start", href: "https://docs.manifesto-ai.dev/guide/quick-start" },
-    { label: "API Reference", href: "https://docs.manifesto-ai.dev/api/" },
+    { label: "Documentation", href: "https://manifesto-docs.eggp.dev" },
+    { label: "Quick Start", href: "https://manifesto-docs.eggp.dev/guide/quick-start" },
+    { label: "API Reference", href: "https://manifesto-docs.eggp.dev/api/" },
   ],
   community: [
-    { label: "GitHub", href: "https://github.com/manifesto-ai/core", icon: Github },
+    { label: "GitHub", href: "https://github.com/eggp-dev/manifesto-core", icon: Github },
     { label: "Twitter", href: "https://x.com/eggplantiny", icon: Twitter },
   ],
 };
@@ -112,7 +112,7 @@ export default function Footer() {
                 pnpm add @manifesto-ai/sdk
               </code>
               <a
-                href="https://github.com/manifesto-ai/core"
+                href="https://github.com/eggp-dev/manifesto-core"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="inline-flex items-center gap-2 px-4 py-2 text-sm font-medium text-white rounded-lg bg-gradient-to-r from-violet-600 to-purple-500 hover:from-violet-700 hover:to-purple-600 transition-all"
@@ -133,7 +133,7 @@ export default function Footer() {
             </p>
             <div className="flex items-center gap-6">
               <a
-                href="https://github.com/manifesto-ai/core/blob/main/LICENSE"
+                href="https://github.com/eggp-dev/manifesto-core/blob/main/LICENSE"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-sm text-muted hover:text-muted-foreground transition-colors"
@@ -141,7 +141,7 @@ export default function Footer() {
                 License
               </a>
               <a
-                href="https://github.com/manifesto-ai/core/blob/main/CONTRIBUTING.md"
+                href="https://github.com/eggp-dev/manifesto-core/blob/main/CONTRIBUTING.md"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-sm text-muted hover:text-muted-foreground transition-colors"

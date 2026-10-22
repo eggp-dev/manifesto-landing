@@ -61,7 +61,7 @@ export default function ShowcaseSection() {
         >
           {/* Preview Screenshot */}
           <a
-            href="https://taskflow.manifesto-ai.dev"
+            href="https://manifesto-taskflow.eggp.dev"
             target="_blank"
             rel="noopener noreferrer"
             className="block gradient-border glow group"
@@ -82,7 +82,7 @@ export default function ShowcaseSection() {
               </div>
               <div className="flex items-center justify-between px-2 pt-3 pb-1">
                 <span className="text-xs font-mono text-muted">
-                  taskflow.manifesto-ai.dev
+                  manifesto-taskflow.eggp.dev
                 </span>
                 <span className="text-xs text-violet-400 font-mono">
                   Powered by GPT-5.4-nano + Manifesto SDK
@@ -127,7 +127,7 @@ export default function ShowcaseSection() {
           {/* CTA */}
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
             <a
-              href="https://taskflow.manifesto-ai.dev"
+              href="https://manifesto-taskflow.eggp.dev"
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center gap-2 px-8 py-4 rounded-xl font-medium text-white bg-gradient-to-r from-violet-600 to-purple-500 hover:from-violet-700 hover:to-purple-600 transition-all hover:scale-105"
@@ -136,7 +136,7 @@ export default function ShowcaseSection() {
               <ExternalLink className="w-4 h-4" />
             </a>
             <a
-              href="https://github.com/manifesto-ai/taskflow"
+              href="https://github.com/eggp-dev/manifesto-taskflow"
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center gap-2 px-8 py-4 rounded-xl font-medium text-white border border-violet-500/20 hover:border-violet-500/40 hover:bg-violet-500/5 transition-all"
